@@ -1,0 +1,28 @@
+.noticias-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+
+}
+.noticias-container h1{
+    font-size: 2vw;
+    background-color: rgb(158, 218, 198);
+    padding: 2%;
+    
+
+    
+}
+.noticias-container > ul{
+    
+    list-style-type: none;
+}
+.noticias-container h2{
+    font-size: 2.5vw;
+
+}
+.buttonLink{
+    background-color: rgb(238, 238, 238);
+    border: rgb(51, 51, 51) solid 5px 5px;
+    color: rgb(243, 0, 0);
+}

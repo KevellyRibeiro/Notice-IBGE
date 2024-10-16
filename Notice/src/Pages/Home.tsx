@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../config.json';
+import introduction from '../introduction.json';
+import '../css/home.css';
 
 // Tipos para as notícias da API
 interface Noticia {
@@ -14,12 +16,15 @@ const Home: React.FC = () => {
   const [noticias, setNoticias] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  //Requisição de dados da API
+
+  // Requisição de dados da API
   useEffect(() => {
     const fetchNoticias = async () => {
       try {
         const response = await axios.get(`${config.apiBaseUrl}`);
-        setNoticias(response.data.items); // Atualiza o estado com as notícias
+        const responseIntro = await axios.get(`${introduction.apiBaseUrlIntr}`)
+        setNoticias(response.data.items);
+        setNoticias(responseIntro.data.items);
       } catch (error) {
         setError('Erro ao buscar as notícias');
       } finally {
@@ -45,8 +50,8 @@ const Home: React.FC = () => {
         {noticias.map((noticia) => (
           <li key={noticia.id}>
             <h2>{noticia.titulo}</h2>
-            <p>{noticia.introducao}</p>
-            <a href={noticia.link} target="_blank" rel="noopener noreferrer">
+            <p>{(noticia.introducao)}</p>
+            <a href={noticia.link} target="_blank" rel="noopener noreferrer" className='buttonLink'>
               Leia mais
             </a>
           </li>
@@ -54,6 +59,6 @@ const Home: React.FC = () => {
       </ul>
     </div>
   );
-}
+};
 
 export default Home;
